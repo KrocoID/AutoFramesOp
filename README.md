@@ -6,4 +6,5 @@ The addon is place on the scene panel of PROPERTIES.
 ShortCut:
 
 ctrl F : move the cursor and the last frame
+
 alt F : move the cursor without moving the last frame
