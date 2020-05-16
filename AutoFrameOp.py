@@ -63,7 +63,21 @@ def currentframe() :
             return
            
        
+#Bouton pour se déplacer à la dernière keyframe
+class Jump_Last_Frame(bpy.types.Operator):
+    '''Play n Stop'''
+    bl_idname = "jump.lastframe"
+    bl_label = "last keyFrame"
+    
+
+
+    def execute(self, context):
        
+        bpy.ops.screen.frame_jump(end=True)
+        bpy.ops.screen.keyframe_jump(next=False )
+       
+
+        return {'FINISHED'}       
         
 
 
@@ -117,6 +131,8 @@ class AFO_Panel(bpy.types.Panel):
         row = layout.row()
         row.operator("addframe.ot_2", text="", icon="MOUSE_LMB")
         row.prop(context.window_manager, "Move_Frame", text="To next frame")
+        row = layout.row()
+        row.operator("jump.lastframe")
 
 
 
@@ -131,6 +147,7 @@ addon_keymaps = []
 def register():
     bpy.utils.register_class(ADDFRAME_OT)
     bpy.utils.register_class(ADDFRAME_OT_2)
+    bpy.utils.register_class(Jump_Last_Frame)
     bpy.utils.register_class(AFO_Panel)
     
     wm = bpy.context.window_manager
@@ -154,6 +171,7 @@ def unregister():
     
     bpy.utils.unregister_class(ADDFRAME_OT)
     bpy.utils.unregister_class(ADDFRAME_OT_2)
+    bpy.utils.unregister_class(Jump_Last_Frame)
     bpy.utils.unregister_class(AFO_Panel)
     
 if __name__ == "__main__":
